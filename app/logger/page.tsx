@@ -8,7 +8,7 @@ interface User {
 }
 
 async function getData() {
-    const response = await axios.get('http://localhost:3000/api/user')
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user`)
     return response.data
 }
 
