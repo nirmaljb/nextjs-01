@@ -1,4 +1,5 @@
 import axios from "axios"
+import { headers } from "next/headers"
 
 interface User {
   id: number,
@@ -8,7 +9,12 @@ interface User {
 }
 
 async function getData() {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user`)
+  const headersList = headers()
+  const host = headersList.get('host') || 'localhost:3000'
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  
+  const apiUrl = `${protocol}://${host}/api/user`
+    const response = await axios.get(apiUrl)
     return response.data
 }
 
